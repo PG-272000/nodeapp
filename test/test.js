@@ -1,19 +1,15 @@
-var request = require('supertest');
-var app = require('../index.js');
- 
-describe('GET /', function() {
-  it('respond with 404 page not found', function(done) {
+const request = require('supertest');
+const app = require('../app'); // Update the path to your app file
+
+describe('GET /', () => {
+  it('respond with hello world', (done) => {
     request(app)
-      .get('/nonexistentpage')
-      .expect(404)
-      .end(function(err, res) {
-        if (err) {
-          // If there's an error, log it and pass it to the done callback
-          console.error(err);
-          return done(err);
-        }
-        // If everything is fine, invoke the done callback
+      .get('/')
+      .expect('hello world')
+      .end((err) => {
+        if (err) return done(err);
         done();
       });
   });
 });
+
